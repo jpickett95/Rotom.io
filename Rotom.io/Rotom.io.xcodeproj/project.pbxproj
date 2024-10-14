@@ -1,0 +1,564 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXContainerItemProxy section */
+		CF99E2DC2CBD995C00034DBF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CF99E2BD2CBD995A00034DBF /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CF99E2C42CBD995A00034DBF;
+			remoteInfo = Rotom.io;
+		};
+		CF99E2E62CBD995C00034DBF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CF99E2BD2CBD995A00034DBF /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CF99E2C42CBD995A00034DBF;
+			remoteInfo = Rotom.io;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		CF99E2C52CBD995A00034DBF /* Rotom.io.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Rotom.io.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CF99E2DB2CBD995C00034DBF /* Rotom.ioTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Rotom.ioTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		CF99E2E52CBD995C00034DBF /* Rotom.ioUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Rotom.ioUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		CF99E2C72CBD995A00034DBF /* Rotom.io */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Rotom.io;
+			sourceTree = "<group>";
+		};
+		CF99E2DE2CBD995C00034DBF /* Rotom.ioTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Rotom.ioTests;
+			sourceTree = "<group>";
+		};
+		CF99E2E82CBD995C00034DBF /* Rotom.ioUITests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Rotom.ioUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		CF99E2C22CBD995A00034DBF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CF99E2D82CBD995C00034DBF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CF99E2E22CBD995C00034DBF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		CF99E2BC2CBD995A00034DBF = {
+			isa = PBXGroup;
+			children = (
+				CF99E2C72CBD995A00034DBF /* Rotom.io */,
+				CF99E2DE2CBD995C00034DBF /* Rotom.ioTests */,
+				CF99E2E82CBD995C00034DBF /* Rotom.ioUITests */,
+				CF99E2C62CBD995A00034DBF /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		CF99E2C62CBD995A00034DBF /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CF99E2C52CBD995A00034DBF /* Rotom.io.app */,
+				CF99E2DB2CBD995C00034DBF /* Rotom.ioTests.xctest */,
+				CF99E2E52CBD995C00034DBF /* Rotom.ioUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		CF99E2C42CBD995A00034DBF /* Rotom.io */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CF99E2EF2CBD995C00034DBF /* Build configuration list for PBXNativeTarget "Rotom.io" */;
+			buildPhases = (
+				CF99E2C12CBD995A00034DBF /* Sources */,
+				CF99E2C22CBD995A00034DBF /* Frameworks */,
+				CF99E2C32CBD995A00034DBF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				CF99E2C72CBD995A00034DBF /* Rotom.io */,
+			);
+			name = Rotom.io;
+			packageProductDependencies = (
+			);
+			productName = Rotom.io;
+			productReference = CF99E2C52CBD995A00034DBF /* Rotom.io.app */;
+			productType = "com.apple.product-type.application";
+		};
+		CF99E2DA2CBD995C00034DBF /* Rotom.ioTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CF99E2F22CBD995C00034DBF /* Build configuration list for PBXNativeTarget "Rotom.ioTests" */;
+			buildPhases = (
+				CF99E2D72CBD995C00034DBF /* Sources */,
+				CF99E2D82CBD995C00034DBF /* Frameworks */,
+				CF99E2D92CBD995C00034DBF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CF99E2DD2CBD995C00034DBF /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				CF99E2DE2CBD995C00034DBF /* Rotom.ioTests */,
+			);
+			name = Rotom.ioTests;
+			packageProductDependencies = (
+			);
+			productName = Rotom.ioTests;
+			productReference = CF99E2DB2CBD995C00034DBF /* Rotom.ioTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		CF99E2E42CBD995C00034DBF /* Rotom.ioUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CF99E2F52CBD995C00034DBF /* Build configuration list for PBXNativeTarget "Rotom.ioUITests" */;
+			buildPhases = (
+				CF99E2E12CBD995C00034DBF /* Sources */,
+				CF99E2E22CBD995C00034DBF /* Frameworks */,
+				CF99E2E32CBD995C00034DBF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CF99E2E72CBD995C00034DBF /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				CF99E2E82CBD995C00034DBF /* Rotom.ioUITests */,
+			);
+			name = Rotom.ioUITests;
+			packageProductDependencies = (
+			);
+			productName = Rotom.ioUITests;
+			productReference = CF99E2E52CBD995C00034DBF /* Rotom.ioUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		CF99E2BD2CBD995A00034DBF /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1600;
+				LastUpgradeCheck = 1600;
+				TargetAttributes = {
+					CF99E2C42CBD995A00034DBF = {
+						CreatedOnToolsVersion = 16.0;
+					};
+					CF99E2DA2CBD995C00034DBF = {
+						CreatedOnToolsVersion = 16.0;
+						TestTargetID = CF99E2C42CBD995A00034DBF;
+					};
+					CF99E2E42CBD995C00034DBF = {
+						CreatedOnToolsVersion = 16.0;
+						TestTargetID = CF99E2C42CBD995A00034DBF;
+					};
+				};
+			};
+			buildConfigurationList = CF99E2C02CBD995A00034DBF /* Build configuration list for PBXProject "Rotom.io" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = CF99E2BC2CBD995A00034DBF;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = CF99E2C62CBD995A00034DBF /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				CF99E2C42CBD995A00034DBF /* Rotom.io */,
+				CF99E2DA2CBD995C00034DBF /* Rotom.ioTests */,
+				CF99E2E42CBD995C00034DBF /* Rotom.ioUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		CF99E2C32CBD995A00034DBF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CF99E2D92CBD995C00034DBF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CF99E2E32CBD995C00034DBF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		CF99E2C12CBD995A00034DBF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CF99E2D72CBD995C00034DBF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CF99E2E12CBD995C00034DBF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		CF99E2DD2CBD995C00034DBF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CF99E2C42CBD995A00034DBF /* Rotom.io */;
+			targetProxy = CF99E2DC2CBD995C00034DBF /* PBXContainerItemProxy */;
+		};
+		CF99E2E72CBD995C00034DBF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CF99E2C42CBD995A00034DBF /* Rotom.io */;
+			targetProxy = CF99E2E62CBD995C00034DBF /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		CF99E2ED2CBD995C00034DBF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		CF99E2EE2CBD995C00034DBF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+			};
+			name = Release;
+		};
+		CF99E2F02CBD995C00034DBF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Rotom.io/Rotom_io.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Rotom.io/Preview Content\"";
+				DEVELOPMENT_TEAM = ZRMFR6Z4V9;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.role-playing-games";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "jpickett95.Rotom-io";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		CF99E2F12CBD995C00034DBF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Rotom.io/Rotom_io.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Rotom.io/Preview Content\"";
+				DEVELOPMENT_TEAM = ZRMFR6Z4V9;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.role-playing-games";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "jpickett95.Rotom-io";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		CF99E2F32CBD995C00034DBF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = ZRMFR6Z4V9;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "jpickett95.Rotom-ioTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Rotom.io.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Rotom.io";
+			};
+			name = Debug;
+		};
+		CF99E2F42CBD995C00034DBF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = ZRMFR6Z4V9;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "jpickett95.Rotom-ioTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Rotom.io.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Rotom.io";
+			};
+			name = Release;
+		};
+		CF99E2F62CBD995C00034DBF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = ZRMFR6Z4V9;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "jpickett95.Rotom-ioUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = Rotom.io;
+			};
+			name = Debug;
+		};
+		CF99E2F72CBD995C00034DBF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = ZRMFR6Z4V9;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "jpickett95.Rotom-ioUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = Rotom.io;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		CF99E2C02CBD995A00034DBF /* Build configuration list for PBXProject "Rotom.io" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CF99E2ED2CBD995C00034DBF /* Debug */,
+				CF99E2EE2CBD995C00034DBF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CF99E2EF2CBD995C00034DBF /* Build configuration list for PBXNativeTarget "Rotom.io" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CF99E2F02CBD995C00034DBF /* Debug */,
+				CF99E2F12CBD995C00034DBF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CF99E2F22CBD995C00034DBF /* Build configuration list for PBXNativeTarget "Rotom.ioTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CF99E2F32CBD995C00034DBF /* Debug */,
+				CF99E2F42CBD995C00034DBF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CF99E2F52CBD995C00034DBF /* Build configuration list for PBXNativeTarget "Rotom.ioUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CF99E2F62CBD995C00034DBF /* Debug */,
+				CF99E2F72CBD995C00034DBF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = CF99E2BD2CBD995A00034DBF /* Project object */;
+}
