@@ -5,29 +5,7 @@
 //  Created by Jonah Pickett on 10/14/24.
 //
 
-enum Generation {
-    case national
-    case redBlueYellow
-    case goldSilver
-    case Crystal
-    case rubySapphire
-    case emerald
-    case fireRedLeafGreen
-    case diamondPearl
-    case platinum
-    case soulSilverHeartGold
-    case blackWhite
-    case black2White2
-    case xY
-    case omegaRubyAlphaSapphire
-    case sunMoon
-    case ultraSunMoon
-    case letsGo
-    case swordShield
-    case brilliantDiamondShiningPearl
-    case legendsArceus
-    case scarletViolet
-}
+import Foundation
 
 enum PokemonType {
     case water
