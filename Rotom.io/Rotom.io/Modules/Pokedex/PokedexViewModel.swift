@@ -15,16 +15,16 @@ class PokedexViewModel: ObservableObject {
     
     // MARK: - -- Properties
     private let networkManager: Networking & JSONDecoding
-    var settings: Settings
+    @EnvironmentObject var settings: Settings
     @Published var pokedexes = [Pokedex]()
     @Published var sprites: [String: Data] = [:]
     @Published var error: (any Error)?
     @Published var presentAlert: Bool = false
     
     // MARK: - -- Lifecycle
-    init(networkManager: Networking & JSONDecoding, settings: Settings) {
+    init(networkManager: Networking & JSONDecoding) {
         self.networkManager = networkManager
-        self.settings = settings
+        //self.settings = settings
         print("PokedexVM: \(settings.game.name)")
         
         Task {

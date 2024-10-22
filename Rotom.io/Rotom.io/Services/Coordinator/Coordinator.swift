@@ -21,18 +21,20 @@ final class Coordinator: ObservableObject, Coordinating {
     // MARK: - -- Properties
     @Published var path = NavigationPath()
     @Published var sheet: Sheet?
-    @EnvironmentObject var settings: Settings
+    @StateObject var settings = Settings()
     
     // MARK: - -- Methods
     @ViewBuilder
     func getPage(page: Page) -> some View {
         switch page {
-        case .main:
+        case .home:
             ContentView()
+                .environmentObject(settings)
         case .pokedex:
-            PokedexView(viewModel: PokedexViewModel(networkManager: NetworkManager(), settings: settings))
-        default :
-            ContentView()
+            PokedexView(viewModel: PokedexViewModel(networkManager: NetworkManager()))
+                .environmentObject(settings)
+        case .pokemonDeatils:
+            PokemonDetailsTabView()
         }
     }
     
@@ -41,18 +43,39 @@ final class Coordinator: ObservableObject, Coordinating {
         switch sheet {
         case .gameSelection:
             GameSheetView()
+                .environmentObject(settings)
         }
+    }
+    
+    func showGameSelection() {
+        sheet = .gameSelection
+    }
+    
+    func navigateToHome() {
+        path.append(Page.home)
+    }
+    
+    func navigateToPokedex() {
+        path.append(Page.pokedex)
+    }
+    
+    func navigateToPokemonDetails() {
+        path.append(Page.pokemonDeatils)
     }
 }
 
 // MARK: Pages
-enum Page: CaseIterable {
-    case main,
-         pokedex
-        
+enum Page: String, CaseIterable, Identifiable {
+    var id: String { self.rawValue }
+    
+    case home,
+         pokedex,
+         pokemonDeatils
 }
 
 // MARK: Sheets
-enum Sheet: CaseIterable {
+enum Sheet: String, CaseIterable, Identifiable {
+    var id: String { self.rawValue }
+    
     case gameSelection
 }

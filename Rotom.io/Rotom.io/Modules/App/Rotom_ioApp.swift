@@ -9,14 +9,16 @@ import SwiftUI
 
 @main
 struct Rotom_ioApp: App {
-    //var settings = Settings()
+    @StateObject var settings = Settings()
+    @StateObject var coordinator = Coordinator()
     //let persistenceController = PersistenceController.shared
 
     // MARK: Body
     var body: some Scene {
         WindowGroup {
-            ContentView()
-                .environmentObject(Settings())
+            MainView()
+                .environmentObject(settings)
+                .environmentObject(coordinator)
                 //.environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }

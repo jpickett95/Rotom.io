@@ -9,12 +9,13 @@ import SwiftUI
 
 struct CustomNavigationStack<NavigationTitle: View, Content: View>: View {
     // MARK: Properties
-    @State var showingSheet: Bool = false
+    @EnvironmentObject var settings: Settings
+    @EnvironmentObject var coordinator: Coordinator
     var title: NavigationTitle
     var contentView: Content
     
     // MARK: Lifecycle
-    init(showingSheet: Bool, @ViewBuilder title: @escaping () -> NavigationTitle, @ViewBuilder contentView: @escaping () -> Content) {
+    init(@ViewBuilder title: @escaping () -> NavigationTitle, @ViewBuilder contentView: @escaping () -> Content) {
         self.contentView = contentView()
         self.title = title()
     }
@@ -37,21 +38,18 @@ struct CustomNavigationStack<NavigationTitle: View, Content: View>: View {
             ToolbarItem(placement: .topBarTrailing) {
                 
                 Button {
-                    showingSheet.toggle()
+                    coordinator.showGameSelection()
                 } label: {
                     Image(systemName: "circle")
                 }
-                .sheet(isPresented: $showingSheet) {
-                    GameSheetView()
-                }
             }
-            
         }
     }
 }
 
 // MARK: Preview
 #Preview {
-    ContentView()
+    MainView()
         .environmentObject(Settings())
+        .environmentObject(Coordinator())
 }

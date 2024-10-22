@@ -88,6 +88,7 @@ struct PokedexView: View {
 
 // MARK: Preview
 #Preview {
-    ContentView()
+    MainView()
         .environmentObject(Settings())
+        .environmentObject(Coordinator())
 }
