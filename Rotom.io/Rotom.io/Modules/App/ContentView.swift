@@ -51,7 +51,7 @@ struct ContentView: View {
                 // MARK: Pokedex
                 NavigationLink(destination: {
                     CustomNavigationStack(showingSheet: showingSheet) {
-                        Image(systemName: "circle")
+                        Text("Pokedex")
                     } contentView: {
                         PokedexView(viewModel: PokedexViewModel(networkManager: NetworkManager(), settings: settings))
                     }

@@ -16,7 +16,8 @@ class PokedexViewModel: ObservableObject {
     // MARK: - -- Properties
     private let networkManager: Networking & JSONDecoding
     var settings: Settings
-    @Published var pokedexes = [CustomPokedex]()
+    @Published var pokedexes = [Pokedex]()
+    @Published var sprites: [String: Data] = [:]
     @Published var error: (any Error)?
     @Published var presentAlert: Bool = false
     
@@ -29,56 +30,52 @@ class PokedexViewModel: ObservableObject {
         Task {
             await getPokedexes()
         }
-
+        
     }
     
     // MARK: - -- Methods
+    
     @MainActor
     func getPokedexes() async {
         do {
-            var pokedexes = [CustomPokedex]()
             
             for pokedexID in settings.game.pokedexIDs {
-                let data = try await networkManager.request(endpoint: PokeAPIEndpoint.resource(path: Path.pokedex, id: pokedexID))
-                
-                let pokedex = try await networkManager.decode(data: data, modelType: Pokedex.self)
-                //print(pokedex)
-                let name = pokedex.name.replacingOccurrences(of: "-", with: " ").capitalized
-
-                var pokemonEntries = [PokedexPokemon]()
-                for entry in pokedex.pokemonEntries {
-                    let speciesData = try await networkManager.request(endpoint: ApiResponseEndpoint.resource(baseURL: entry.pokemonSpecies.url, path: nil))
-                    
-                    let species = try await networkManager.decode(data: speciesData, modelType: PokemonSpecies.self)
-                    
-                    let pokemonData = try await networkManager.request(endpoint: PokeAPIEndpoint.resource(path: Path.pokemon, id: species.id))
-                    
-                    let pokemon = try await networkManager.decode(data: pokemonData, modelType: Pokemon.self)
-                    print(pokemon)
-                    pokemonEntries.append( PokedexPokemon(name: entry.pokemonSpecies.name, spriteURL: pokemon.sprites.frontDefault))
-                }
-                    
-                let customPokedex = CustomPokedex(id: pokedex.id,name: name, pokemon: pokemonEntries)
-                print(customPokedex)
-                pokedexes.append(customPokedex)
+                let pokedex = try await getPokedex(pokedexID)
+                self.pokedexes.append(pokedex)
             }
-            self.pokedexes = pokedexes
+            
+            for pokedex in pokedexes {
+                for pokemon in pokedex.pokemonEntries {
+                    try await getSpriteURL(pokemon.pokemonSpecies.name, pokemon.pokemonSpecies.url)
+                }
+            }
+            
         } catch {
-            print(error.localizedDescription)
+            print("getPokedexes \(error.localizedDescription)")
             self.error = error
             self.presentAlert = true
         }
     }
     
-    func getSpriteURL(_ pokemonName: String) async -> String {
+    func getPokedex(_ pokedexID: Int) async throws -> Pokedex {
+        let data = try await networkManager.request(endpoint: PokeAPIEndpoint.resource(path: Path.pokedex, id: pokedexID))
+        let pokedex = try await networkManager.decode(data: data, modelType: Pokedex.self)
+        return pokedex
+    }
+    
+    @MainActor
+    func getSpriteURL(_ species: String, _ speciesURL: String) async throws {
         do {
-            let data = try await networkManager.request(endpoint: PokeAPIEndpoint.resource(path: Path.pokemon, name: pokemonName))
+            let pokemonURL = speciesURL.replacingOccurrences(of: "-species", with: "")
+            
+            let data = try await networkManager.request(endpoint: ApiResponseEndpoint.resource(baseURL: pokemonURL, path: nil))
             
             let pokemon = try await networkManager.decode(data: data, modelType: Pokemon.self)
-            return pokemon.sprites.frontDefault
+            let sprite = pokemon.sprites.frontDefault
+            print(sprite)
+            self.sprites[species] = try await networkManager.getData(urlPath: sprite)
         } catch {
-            print(error.localizedDescription)
+            print("getSpriteURL: \(error.localizedDescription)")
         }
-        return ""
     }
 }

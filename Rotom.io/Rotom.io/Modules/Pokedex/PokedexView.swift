@@ -22,41 +22,29 @@ struct PokedexView: View {
         ScrollView {
             LazyVStack(alignment: .leading, pinnedViews: .sectionHeaders) {
                 
-                
                 ForEach(vm.pokedexes, id: \.self.id) { pokedex in
+                    
+                    // MARK: Pokedex Section
                     Section {
-                        LazyVGrid(columns: [GridItem(.adaptive(minimum: 50))]) {
-                            ForEach(pokedex.pokemon, id: \.self.name) { entry in
+                        LazyVGrid(columns: [GridItem(.adaptive(minimum: 50), spacing: 15)]) {
+                            ForEach(pokedex.pokemonEntries, id: \.self.entryNumber) { entry in
                                 
-                            
-                                AsyncImage(url: URL(string: entry.spriteURL))
-                                
-                            
-                                  
-//                                AsyncImage(url: URL(string: entry.spriteURL)) { phase in
-//                                        if let image = phase.image {
-//                                            image.resizable()
-//                                            image.scaledToFit()
-//                                            // Displays the loaded image.
-//                                        } else if phase.error != nil {
-//                                                 Image("Pokeball") // Indicates an error, show default image
-//                                        } else {
-//                                                 // Acts as a placeholder.
-//                                                 ProgressView().progressViewStyle(.circular)
-//                                                 // Image("Mickey Mouse")
-//                                        }
-//                                    }
-                            
-                                
-                                
-                                
-
+                                // MARK: Pokemon Sprite
+                                if let imageData = vm.sprites[entry.pokemonSpecies.name], let image = UIImage(data: imageData) {
+                                    Image(uiImage: image)
+                                        .resizable()
+                                        .scaledToFit()
+                                    
+                                } else {
+                                    ProgressView()
+                                        .progressViewStyle(.circular)
+                                }
                             }
                         }
                         .padding()
                     } header: {
                         HStack {
-                            Text(pokedex.name)
+                            Text(pokedex.name.replacingOccurrences(of: "-", with: " ").capitalized)
                                 .font(.title3).bold()
                             
                             Spacer()
@@ -67,33 +55,33 @@ struct PokedexView: View {
                     } footer: {
                         HStack {
                             Spacer()
-                            Text("\(pokedex.pokemon.count) Pokemon")
+                            Text("\(pokedex.pokemonEntries.count) Pokemon")
                                 .font(.subheadline).bold()
                             Spacer()
                         }
                         .padding(.bottom)
                     }
-                    
                 }
             }
         }
-//        .alert("Pokedex Error!", isPresented: $vm.presentAlert, actions: {
-//            Button("OK", role: .cancel) {
-//                vm.presentAlert = false
-//            }
-//        }, message: {
-//            if let error = vm.error {
-//                Text(ErrorManager.getErrorMessage(error))
-//            }
-//        })
-//        .task {
-//            await vm.getPokedexes()
-//        }
-//        .onChange(of: settings.game) {
-//            Task {
-//                await vm.getPokedexes()
-//            }
-//        }
+        //.background(Color.primary)
+        //        .alert("Pokedex Error!", isPresented: $vm.presentAlert, actions: {
+        //            Button("OK", role: .cancel) {
+        //                vm.presentAlert = false
+        //            }
+        //        }, message: {
+        //            if let error = vm.error {
+        //                Text(ErrorManager.getErrorMessage(error))
+        //            }
+        //        })
+        //        .task {
+        //            await vm.getPokedexes()
+        //        }
+        //        .onChange(of: settings.game) {
+        //            Task {
+        //                await vm.getPokedexes()
+        //            }
+        //        }
         
     }
 }
