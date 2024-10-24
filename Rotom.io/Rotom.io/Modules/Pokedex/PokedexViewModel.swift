@@ -46,7 +46,13 @@ class PokedexViewModel: ObservableObject {
             
             for pokedex in pokedexes {
                 for pokemon in pokedex.pokemonEntries {
-                    try await getSpriteURL(pokemon.pokemonSpecies.name, pokemon.pokemonSpecies.url)
+                    
+                    if let imageData = CacheManager.shared.getImage(forKey: pokemon.pokemonSpecies.name) as? Data {
+                        self.sprites[pokemon.pokemonSpecies.name] = imageData
+                        print("Fetched from cache.")
+                    } else {
+                        try await getSpriteURL(pokemon.pokemonSpecies.name, pokemon.pokemonSpecies.url)
+                    }
                 }
             }
             
@@ -72,8 +78,14 @@ class PokedexViewModel: ObservableObject {
             
             let pokemon = try await networkManager.decode(data: data, modelType: Pokemon.self)
             let sprite = pokemon.sprites.frontDefault
-            print(sprite)
+
             self.sprites[species] = try await networkManager.getData(urlPath: sprite)
+            
+            if let imageData = sprites[species] as? NSData {
+                CacheManager.shared.setImage(imageData, forKey: species)
+                print("Image cached.")
+            }
+            
         } catch {
             print("getSpriteURL: \(error.localizedDescription)")
         }
