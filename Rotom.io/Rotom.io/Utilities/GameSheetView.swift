@@ -11,7 +11,7 @@ struct GameSheetView: View {
     // MARK: Properties
     @Environment(\.dismiss) var dismiss
     @Environment(\.colorScheme) var colorScheme
-    @EnvironmentObject var settings: Settings
+    @EnvironmentObject var coordinator: Coordinator
     
     // MARK: Body
     var body: some View {
@@ -19,7 +19,7 @@ struct GameSheetView: View {
             List {
                 ForEach(Game.allCases) { game in
                     Button {
-                        settings.game = PokemonGame.getGame(game: game)
+                        coordinator.settings.game = PokemonGame.getGame(game: game)
                         dismiss()
                     } label: {
                         HStack(spacing: 20) {
@@ -58,6 +58,6 @@ struct GameSheetView: View {
 
 // MARK: Preview
 #Preview {
-    ContentView()
-        .environmentObject(Settings())
+    GameSheetView()
+        .environmentObject(Coordinator(settings: Settings()))
 }

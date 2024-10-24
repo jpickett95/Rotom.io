@@ -28,6 +28,6 @@ struct MainView: View {
 
 #Preview {
     MainView()
-        .environmentObject(Coordinator())
-        .environmentObject(Settings())
+        //.environmentObject(Settings())
+        .environmentObject(Coordinator(settings: Settings()))
 }

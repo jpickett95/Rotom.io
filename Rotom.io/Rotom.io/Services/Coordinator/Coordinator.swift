@@ -21,7 +21,11 @@ final class Coordinator: ObservableObject, Coordinating {
     // MARK: - -- Properties
     @Published var path = NavigationPath()
     @Published var sheet: Sheet?
-    @StateObject var settings = Settings()
+    var settings: Settings
+    
+    init(settings: Settings) {
+        self.settings = settings
+    }
     
     // MARK: - -- Methods
     @ViewBuilder
@@ -29,10 +33,12 @@ final class Coordinator: ObservableObject, Coordinating {
         switch page {
         case .home:
             ContentView()
-                .environmentObject(settings)
         case .pokedex:
-            PokedexView(viewModel: PokedexViewModel(networkManager: NetworkManager()))
-                .environmentObject(settings)
+            CustomNavigationStack {
+                Text("Pokedex")
+            } contentView: {
+                PokedexView(viewModel: PokedexViewModel(networkManager: NetworkManager(), settings: self.settings))
+            }
         case .pokemonDeatils:
             PokemonDetailsTabView()
         }
@@ -43,7 +49,6 @@ final class Coordinator: ObservableObject, Coordinating {
         switch sheet {
         case .gameSelection:
             GameSheetView()
-                .environmentObject(settings)
         }
     }
     

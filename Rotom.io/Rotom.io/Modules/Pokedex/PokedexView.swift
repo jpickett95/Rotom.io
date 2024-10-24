@@ -10,7 +10,8 @@ import SwiftUI
 struct PokedexView: View {
     // MARK: Properties
     @ObservedObject private var vm: PokedexViewModel
-    @EnvironmentObject var settings: Settings
+    @EnvironmentObject var coordinator: Coordinator
+    
     
     // MARK: Lifecycle
     init(viewModel: PokedexViewModel) {
@@ -29,15 +30,19 @@ struct PokedexView: View {
                         LazyVGrid(columns: [GridItem(.adaptive(minimum: 50), spacing: 15)]) {
                             ForEach(pokedex.pokemonEntries, id: \.self.entryNumber) { entry in
                                 
-                                // MARK: Pokemon Sprite
-                                if let imageData = vm.sprites[entry.pokemonSpecies.name], let image = UIImage(data: imageData) {
-                                    Image(uiImage: image)
-                                        .resizable()
-                                        .scaledToFit()
-                                    
-                                } else {
-                                    ProgressView()
-                                        .progressViewStyle(.circular)
+                                Button {
+                                    coordinator.navigateToPokemonDetails()
+                                } label: {
+                                    // MARK: Pokemon Sprite
+                                    if let imageData = vm.sprites[entry.pokemonSpecies.name], let image = UIImage(data: imageData) {
+                                        Image(uiImage: image)
+                                            .resizable()
+                                            .scaledToFit()
+                                        
+                                    } else {
+                                        ProgressView()
+                                            .progressViewStyle(.circular)
+                                    }
                                 }
                             }
                         }
@@ -89,6 +94,5 @@ struct PokedexView: View {
 // MARK: Preview
 #Preview {
     MainView()
-        .environmentObject(Settings())
-        .environmentObject(Coordinator())
+        .environmentObject(Coordinator(settings: Settings()))
 }

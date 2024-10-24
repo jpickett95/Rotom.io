@@ -9,7 +9,6 @@ import SwiftUI
 
 struct CustomNavigationStack<NavigationTitle: View, Content: View>: View {
     // MARK: Properties
-    @EnvironmentObject var settings: Settings
     @EnvironmentObject var coordinator: Coordinator
     var title: NavigationTitle
     var contentView: Content
@@ -22,11 +21,7 @@ struct CustomNavigationStack<NavigationTitle: View, Content: View>: View {
     
     // MARK: Body
     var body: some View {
-        NavigationStack {
-            
-            contentView
-            
-        }
+        contentView
         .toolbar {
             // MARK: Navigation Title
             ToolbarItem(placement: .principal) {
@@ -50,6 +45,5 @@ struct CustomNavigationStack<NavigationTitle: View, Content: View>: View {
 // MARK: Preview
 #Preview {
     MainView()
-        .environmentObject(Settings())
-        .environmentObject(Coordinator())
+        .environmentObject(Coordinator(settings: Settings()))
 }

@@ -10,7 +10,6 @@ import CoreData
 
 struct ContentView: View {
     // MARK: Properties
-    @EnvironmentObject var settings: Settings
     @EnvironmentObject var coordinator: Coordinator
     @State var selectedGame: Game? = Game.national
 
@@ -19,18 +18,9 @@ struct ContentView: View {
         NavigationStack {
             
             ScrollView {
-                Text(settings.game.name)
+                Text(coordinator.settings.game.name)
                 
                 // MARK: Pokedex
-//                NavigationLink(destination: {
-//                    CustomNavigationStack {
-//                        Text("Pokedex")
-//                    } contentView: {
-//                        PokedexView(viewModel: PokedexViewModel(networkManager: NetworkManager(), settings: settings))
-//                    }
-//                }, label: {
-//                    Text("Pokedex")
-//                })
                 Button {
                     coordinator.navigateToPokedex()
                 } label: {
@@ -56,13 +46,7 @@ struct ContentView: View {
                     } label: {
                         Image(systemName: "circle")
                     }
-//                    .sheet(isPresented: $showingSheet) {
-//                        GameSheetView()
-//                    }
                 }
-                
-                
-                
             }
             
         }
@@ -72,6 +56,5 @@ struct ContentView: View {
 // MARK: Preview
 #Preview {
     MainView()
-        .environmentObject(Settings())
-        .environmentObject(Coordinator())
+        .environmentObject(Coordinator(settings: Settings()))
 }
