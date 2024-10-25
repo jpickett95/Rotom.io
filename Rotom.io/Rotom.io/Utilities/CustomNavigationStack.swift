@@ -39,6 +39,7 @@ struct CustomNavigationStack<NavigationTitle: View, Content: View>: View {
                 }
             }
         }
+        .toolbarBackgroundVisibility(.visible)
     }
 }
 

@@ -8,16 +8,33 @@
 import SwiftUI
 
 struct PokemonDetailsTabView: View {
+    
+    // MARK: Properties
+    @ObservedObject private var vm: PokemonDetailsViewModel
+    
+    // MARK: Lifecycle
+    init(viewModel: PokemonDetailsViewModel) {
+        self.vm = viewModel
+    }
+    
     // MARK: Body
     var body: some View {
         CustomNavigationStack {
-            Text("\("Bulbasaur")")
+            HStack(spacing: 10) {
+                if let imageData = FileManager.readDataFromFile(filename: "\(vm.pokemonEntry.pokemonSpecies.name).dat"), let image = UIImage(data: imageData) {
+                    Image(uiImage: image)
+                        .resizable()
+                        .scaledToFit()
+                }
+                
+                Text("\(vm.pokemonEntry.pokemonSpecies.name.capitalized)")
+            }
         } contentView: {
             TabView {
                 
                 // MARK: Details
                 Tab("Details", systemImage: "list.bullet", role: .none) {
-                    PokemonDetailsView()
+                    PokemonDetailsView(viewModel: vm)
                 }
                 
                 // MARK: Evolutions

@@ -22,6 +22,7 @@ final class Coordinator: ObservableObject, Coordinating {
     @Published var path = NavigationPath()
     @Published var sheet: Sheet?
     var settings: Settings
+    private var pokemonEntry: PokemonEntry?
     
     init(settings: Settings) {
         self.settings = settings
@@ -40,7 +41,9 @@ final class Coordinator: ObservableObject, Coordinating {
                 PokedexView(viewModel: PokedexViewModel(networkManager: NetworkManager(), settings: self.settings))
             }
         case .pokemonDeatils:
-            PokemonDetailsTabView()
+            if let entry = pokemonEntry {
+                PokemonDetailsTabView(viewModel: PokemonDetailsViewModel(networkManager: NetworkManager(), entry: entry))
+            }
         }
     }
     
@@ -64,7 +67,8 @@ final class Coordinator: ObservableObject, Coordinating {
         path.append(Page.pokedex)
     }
     
-    func navigateToPokemonDetails() {
+    func navigateToPokemonDetails(entry: PokemonEntry) {
+        self.pokemonEntry = entry
         path.append(Page.pokemonDeatils)
     }
 }

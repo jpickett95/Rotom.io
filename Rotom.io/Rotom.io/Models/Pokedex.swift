@@ -5,17 +5,6 @@
 //  Created by Jonah Pickett on 10/21/24.
 //
 
-struct CustomPokedex {
-    let id: Int
-    let name: String
-    let pokemon: [PokedexPokemon]
-}
-
-struct PokedexPokemon {
-    let name: String
-    let spriteURL: String
-}
-
 /**
  - Parameters:
     - id: The identifier for this resource.
@@ -40,15 +29,4 @@ struct PokemonEntry: Decodable {
     let pokemonSpecies: NamedApiResource
 }
 
-struct Pokemon: Decodable {
-    let sprites: PokemonSprites
-}
 
-struct PokemonSprites: Decodable {
-    let frontDefault: String
-}
-
-struct PokemonSpecies: Decodable {
-    let id: Int
-    let name: String
-}

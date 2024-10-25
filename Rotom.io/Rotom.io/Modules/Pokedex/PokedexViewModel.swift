@@ -7,7 +7,7 @@
 
 // MARK: - Pokedex View Model
 import Foundation
-import SwiftUICore
+//import SwiftUICore
 
 // MARK: - - View Model
 class PokedexViewModel: ObservableObject {
@@ -47,9 +47,9 @@ class PokedexViewModel: ObservableObject {
             for pokedex in pokedexes {
                 for pokemon in pokedex.pokemonEntries {
                     
-                    if let imageData = CacheManager.shared.getImage(forKey: pokemon.pokemonSpecies.name) as? Data {
+                    if let imageData = FileManager.readDataFromFile(filename: "\(pokemon.pokemonSpecies.name).dat") {
                         self.sprites[pokemon.pokemonSpecies.name] = imageData
-                        print("Fetched from cache.")
+                        //print("Fetched from file.")
                     } else {
                         try await getSpriteURL(pokemon.pokemonSpecies.name, pokemon.pokemonSpecies.url)
                     }
@@ -57,7 +57,7 @@ class PokedexViewModel: ObservableObject {
             }
             
         } catch {
-            print("getPokedexes \(error.localizedDescription)")
+            print("PokedexVM - getPokedexes: \(error.localizedDescription)")
             self.error = error
             self.presentAlert = true
         }
@@ -81,13 +81,14 @@ class PokedexViewModel: ObservableObject {
 
             self.sprites[species] = try await networkManager.getData(urlPath: sprite)
             
-            if let imageData = sprites[species] as? NSData {
-                CacheManager.shared.setImage(imageData, forKey: species)
-                print("Image cached.")
+            if let imageData = sprites[species] {
+                FileManager.saveDataToFile(filename: "\(species).dat", content: imageData)
             }
             
         } catch {
-            print("getSpriteURL: \(error.localizedDescription)")
+            print("PokedexVM - getSpriteURL: \(error.localizedDescription)")
         }
     }
+    
+    
 }

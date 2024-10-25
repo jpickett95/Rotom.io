@@ -31,7 +31,7 @@ struct PokedexView: View {
                             ForEach(pokedex.pokemonEntries, id: \.self.entryNumber) { entry in
                                 
                                 Button {
-                                    coordinator.navigateToPokemonDetails()
+                                    coordinator.navigateToPokemonDetails(entry: entry)
                                 } label: {
                                     // MARK: Pokemon Sprite
                                     if let imageData = vm.sprites[entry.pokemonSpecies.name], let image = UIImage(data: imageData) {
