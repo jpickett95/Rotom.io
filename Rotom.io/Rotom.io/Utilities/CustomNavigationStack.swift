@@ -39,7 +39,8 @@ struct CustomNavigationStack<NavigationTitle: View, Content: View>: View {
                 }
             }
         }
-        .toolbarBackgroundVisibility(.visible)
+        .toolbarBackground(Color("rotomPhone-background-orange"), for: .navigationBar)
+        .toolbarBackgroundVisibility(.visible, for: .navigationBar)
     }
 }
 

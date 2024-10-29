@@ -22,14 +22,14 @@ struct ContentView: View {
                 
                 // MARK: Pokedex
                 Button {
-                    coordinator.navigateToPokedex()
+                    coordinator.navigate(to: .pokedex)
                 } label: {
                     Text("Pokedex")
                 }
 
             }
-            //.navigationTitle("Rotom.io")
-            //.navigationBarTitleDisplayMode(.large)
+//            .navigationTitle("Rotom.io")
+//            .navigationBarTitleDisplayMode(.large)
             .toolbar {
                 // MARK: Navigation Title
                 ToolbarItem(placement: .topBarLeading) {
@@ -48,8 +48,9 @@ struct ContentView: View {
                     }
                 }
             }
-            
+
         }
+        
     }
 }
 

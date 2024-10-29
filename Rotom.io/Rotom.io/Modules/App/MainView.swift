@@ -21,7 +21,7 @@ struct MainView: View {
             
                 .sheet(item: $coordinator.sheet) { sheet in
                     coordinator.getSheet(sheet: sheet)
-                }
+                }            
         }
     }
 }

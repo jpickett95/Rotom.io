@@ -18,6 +18,9 @@ class PokemonDetailsViewModel: ObservableObject {
     let pokemonEntry: PokemonEntry
     @Published var pokemon: Pokemon?
     @Published var officialArtwork: Data?
+    @Published var shinyArtwork: Data?
+    @Published var showShinyArtwork: Bool = false
+    @Published var types = [String]()
     
     // MARK: - -- Lifecycle
     init(networkManager: Networking & JSONDecoding, entry: PokemonEntry) {
@@ -26,7 +29,8 @@ class PokemonDetailsViewModel: ObservableObject {
         
         Task {
             await getPokemon()
-            await getOfficialArtwork()
+            await getTypes()
+            await getArtwork()
         }
     }
     
@@ -49,14 +53,70 @@ class PokemonDetailsViewModel: ObservableObject {
     }
     
     @MainActor
-    func getOfficialArtwork() async {
+    func getArtwork() async {
         do {
-            guard let url = pokemon?.sprites.other.officialArtwork.frontDefault else { return }
+            guard let regularURL = pokemon?.sprites.other.officialArtwork.frontDefault, let shinyURL = pokemon?.sprites.other.officialArtwork.frontShiny else { return }
             
-            let data = try await networkManager.getData(urlPath: url)
-            self.officialArtwork = data
+            let regularData = try await networkManager.getData(urlPath: regularURL)
+            self.officialArtwork = regularData
+                        
+            let shinyData = try await networkManager.getData(urlPath: shinyURL)
+            self.shinyArtwork = shinyData
         } catch {
-            print("PokemonDetailsVM - getOfficialArtwork: \(error.localizedDescription)")
+            print("PokemonDetailsVM - getArtwork: \(error.localizedDescription)")
+        }
+    }
+    
+    @MainActor
+    func getTypes() {
+        if let type1 = pokemon?.types.first?.type.name, let type2 = pokemon?.types.last?.type.name {
+            types.append(type1)
+            types.append(type2)
+        }
+    }
+    
+    func getTypeColor(type: String) -> PokemonTypeColor {
+        switch(type) {
+        case "normal":
+            .normal
+        case "fire":
+            .fire
+        case "water":
+            .water
+        case "electric":
+            .electric
+        case "grass":
+            .grass
+        case "ice":
+            .ice
+        case "fighting":
+            .fighting
+        case "poison":
+            .poison
+        case "ground":
+            .ground
+        case "flying":
+            .flying
+        case "psychic":
+            .psychic
+        case "bug":
+            .bug
+        case "dark":
+            .dark
+        case "steel":
+            .steel
+        case "rock":
+            .rock
+        case "ghost":
+            .ghost
+        case "dragon":
+            .dragon
+        case "fairy":
+            .fairy
+        case "stellar":
+            .stellar
+        default:
+            .unknown
         }
     }
 }

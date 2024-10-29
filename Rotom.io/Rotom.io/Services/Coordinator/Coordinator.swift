@@ -36,7 +36,7 @@ final class Coordinator: ObservableObject, Coordinating {
             ContentView()
         case .pokedex:
             CustomNavigationStack {
-                Text("Pokedex")
+                Text("Pokédex")
             } contentView: {
                 PokedexView(viewModel: PokedexViewModel(networkManager: NetworkManager(), settings: self.settings))
             }
@@ -59,13 +59,26 @@ final class Coordinator: ObservableObject, Coordinating {
         sheet = .gameSelection
     }
     
-    func navigateToHome() {
-        path.append(Page.home)
+    func navigate(to destination: Page) {
+        path.append(destination)
     }
     
-    func navigateToPokedex() {
-        path.append(Page.pokedex)
+    func navigateBack() {
+        path.removeLast()
     }
+    
+    func navigateToHome() {
+        path.removeLast(path.count)
+    }
+    
+//    func navigateToPokedex() {
+//        if path.count > 0 {
+//            path = path.
+////            path.append(Page.pokedex)
+//        } else {
+//            path.append(Page.pokedex)
+//        }
+//    }
     
     func navigateToPokemonDetails(entry: PokemonEntry) {
         self.pokemonEntry = entry

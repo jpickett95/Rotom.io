@@ -19,42 +19,58 @@ struct PokemonDetailsTabView: View {
     
     // MARK: Body
     var body: some View {
-        CustomNavigationStack {
-            HStack(spacing: 10) {
-                if let imageData = FileManager.readDataFromFile(filename: "\(vm.pokemonEntry.pokemonSpecies.name).dat"), let image = UIImage(data: imageData) {
-                    Image(uiImage: image)
-                        .resizable()
-                        .scaledToFit()
-                }
+        
+        
+        TabView {
+            
+            // MARK: Details
+            Tab("Details", systemImage: "list.bullet", role: .none) {
+                PokemonDetailsView(viewModel: vm)
                 
-                Text("\(vm.pokemonEntry.pokemonSpecies.name.capitalized)")
             }
-        } contentView: {
-            TabView {
+            
+            
+            // MARK: Evolutions
+            Tab("Evolutions", systemImage: "point.3.connected.trianglepath.dotted", role: .none) {
+                PokemonEvolutionsView()
                 
-                // MARK: Details
-                Tab("Details", systemImage: "list.bullet", role: .none) {
-                    PokemonDetailsView(viewModel: vm)
-                }
-                
-                // MARK: Evolutions
-                Tab("Evolutions", systemImage: "point.3.connected.trianglepath.dotted", role: .none) {
-                    PokemonEvolutionsView()
-                }
-                
-                // MARK: Locations
-                Tab("Locations", systemImage: "location.north", role: .none) {
-                    PokemonLocationsView()
-                }
-                
-                // MARK: Moves
-                Tab("Moves", systemImage: "dot.scope", role: .none) {
-                    PokemonMovesView()
-                }
-
             }
-            .tint(.typeUnknown) // Pokemon Type Color
+            
+            // MARK: Locations
+            Tab("Locations", systemImage: "location.north", role: .none) {
+                PokemonLocationsView()
+                
+            }
+            
+            // MARK: Moves
+            Tab("Moves", systemImage: "dot.scope", role: .none) {
+                PokemonMovesView()
+                
+            }
+            
+            
         }
+        .background(Color("rotomPhone-background-orange"))
+        .tint(.typeUnknown) // Pokemon Type Color
+        
+        .toolbar {
+            ToolbarItem(placement: .principal) {
+                HStack(spacing: 10) {
+                    if let imageData = FileManager.readDataFromFile(filename: "\(vm.pokemonEntry.pokemonSpecies.name).dat"), let image = UIImage(data: imageData) {
+                        Image(uiImage: image)
+                            .resizable()
+                            .scaledToFit()
+                    }
+                    
+                    Text("\(vm.pokemonEntry.pokemonSpecies.name.capitalized)")
+                        .font(.headline).bold()
+                        .foregroundStyle(.white)
+                }
+            }
+        }
+        .toolbarBackground(Color("rotomPhone-background-orange"), for: .navigationBar, .tabBar)
+        .toolbarBackgroundVisibility(.visible, for: .navigationBar, .tabBar)
+        
     }
 }
 
