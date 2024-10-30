@@ -51,8 +51,7 @@ struct PokemonDetailsTabView: View {
             
         }
         .background(Color("rotomPhone-background-orange"))
-        .tint(.typeUnknown) // Pokemon Type Color
-        
+        .tint(Color(vm.getTypeColor(type: vm.types.first ?? "").rawValue)) // Pokemon Type Color
         .toolbar {
             ToolbarItem(placement: .principal) {
                 HStack(spacing: 10) {

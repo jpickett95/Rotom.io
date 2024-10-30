@@ -60,3 +60,9 @@ struct Name: Decodable {
     let name: String
     let language: NamedApiResource
 }
+
+struct FlavorText: Decodable {
+    let flavorText: String
+    let language: NamedApiResource
+    let version: NamedApiResource
+}

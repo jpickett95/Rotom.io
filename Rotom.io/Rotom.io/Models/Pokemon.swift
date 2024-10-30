@@ -11,6 +11,7 @@ struct Pokemon: Decodable {
     let sprites: PokemonSprites
     let species: NamedApiResource
     let types: [SpeciesType]
+    let stats: [PokemonStat]
 }
 
 struct PokemonSprites: Decodable {
@@ -36,4 +37,20 @@ struct OfficialArtwork: Decodable {
 struct SpeciesType: Decodable {
     let slot: Int
     let type: NamedApiResource
+}
+
+struct PokemonSpecies: Decodable {
+    let flavorTextEntries: [FlavorText]
+    let varieties: [PokemonSpeciesVariety]
+}
+
+struct PokemonSpeciesVariety: Decodable {
+    let isDefault: Bool
+    let pokemon: NamedApiResource
+}
+
+struct PokemonStat: Decodable {
+    let stat: NamedApiResource
+    let effort: Int
+    let baseStat: Int
 }

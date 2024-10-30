@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum PokemonType {
+enum TypeCase {
     case water
     case stellar
     case steel
@@ -29,7 +29,7 @@ enum PokemonType {
     case bug
 }
 
-enum PokemonEggGroup {
+enum EggGroupCase {
     case notDiscovered
     case dragon
     case ditto
@@ -47,7 +47,7 @@ enum PokemonEggGroup {
     case monster
 }
 
-enum PokemonStat {
+enum StatCase {
     case attack
     case defense
     case hp
@@ -56,7 +56,7 @@ enum PokemonStat {
     case speed
 }
 
-enum PokemonAttackType {
+enum AttackTypeCase {
     case physical
     case special
     case status

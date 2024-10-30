@@ -42,7 +42,7 @@ final class Coordinator: ObservableObject, Coordinating {
             }
         case .pokemonDeatils:
             if let entry = pokemonEntry {
-                PokemonDetailsTabView(viewModel: PokemonDetailsViewModel(networkManager: NetworkManager(), entry: entry))
+                PokemonDetailsTabView(viewModel: PokemonDetailsViewModel(networkManager: NetworkManager(), entry: entry, settings: settings))
             }
         }
     }

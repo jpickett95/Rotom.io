@@ -111,10 +111,86 @@ struct PokemonDetailsView: View {
             }
             .frame(maxHeight:30)
             
+            // MARK: Game Version Picker
+            if vm.games.count > 1 {
+                Picker("Game Version", selection: $vm.selectedversion) {
+                    ForEach(vm.games, id: \.self) {
+                        Text($0.replacingOccurrences(of: "-", with: " ").capitalized).tag($0)
+                    }
+                }
+                .padding(.top, 20)
+            }
             
+            // MARK: Flavor Text
+            Text(vm.getFlavorText())
+                .padding(.horizontal, 20)
+                .padding(.top, 10)
             
+            Divider()
+                .padding(.vertical, 20)
+                .padding(.horizontal, 20)
             
+            VStack(spacing: 20) {
+                
+                // MARK: Stats
+                VStack(alignment: .leading) {
+                    Text("Stats")
+                        .font(.title2).bold()
+                    
+                    if let stats = vm.pokemon?.stats {
+                        ForEach(stats, id: \.self.stat.name) { stat in
+                            
+                            HStack {
+                                Text(getStatAbbreviation(stat.stat.name)).bold()
+                                    .foregroundStyle(Color(vm.getTypeColor(type: vm.pokemon?.types.first?.type.name ?? "").rawValue))
+                                    .frame(minWidth: 70, alignment: .leading)
+                                Text("\(stat.baseStat)").bold()
+                                    .frame(minWidth: 70, alignment: .leading)
+                                ProgressView(value: Float(stat.baseStat), total: 255)
+                            }
+                            
+                            
+                        }
+                        
+                        HStack {
+                            Text("TOT").bold()
+                                .foregroundStyle(Color(vm.getTypeColor(type: vm.pokemon?.types.first?.type.name ?? "").rawValue))
+                                .frame(minWidth: 70, alignment: .leading)
+                            Text("\(vm.getTotalStats())").bold()
+                                .frame(minWidth: 70, alignment: .leading)
+                            ProgressView(value: Float(vm.getTotalStats()), total: 255*6)
+                        }
+                    }
+                }
+                
+                // MARK: Resistances
+                
+                // MARK: Weaknesses
+                
+                // MARK: Characteristics
+            }
+            .padding(.horizontal, 20)
+
             Spacer()
+        }
+    }
+    
+    func getStatAbbreviation(_ stat: String) -> String {
+        switch stat {
+        case "hp":
+            return "HP"
+        case "attack":
+            return "ATK"
+        case "defense":
+            return "DEF"
+        case "special-attack":
+            return "SpATK"
+        case "special-defense":
+            return "SpDEF"
+        case "speed":
+            return "SPD"
+        default:
+            return "N/A"
         }
     }
     

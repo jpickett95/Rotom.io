@@ -16,21 +16,30 @@ class PokemonDetailsViewModel: ObservableObject {
     // MARK: - -- Properties
     private let networkManager: Networking & JSONDecoding
     let pokemonEntry: PokemonEntry
+    var settings: Settings
+    var games: [String] {
+        return settings.game.versions
+    }
     @Published var pokemon: Pokemon?
     @Published var officialArtwork: Data?
     @Published var shinyArtwork: Data?
     @Published var showShinyArtwork: Bool = false
     @Published var types = [String]()
+    @Published var species: PokemonSpecies?
+    @Published var selectedversion: String?
     
     // MARK: - -- Lifecycle
-    init(networkManager: Networking & JSONDecoding, entry: PokemonEntry) {
+    init(networkManager: Networking & JSONDecoding, entry: PokemonEntry, settings: Settings) {
         self.networkManager = networkManager
         self.pokemonEntry = entry
+        self.settings = settings
+        selectedversion = games.first
         
         Task {
             await getPokemon()
             await getTypes()
             await getArtwork()
+            await getSpecies()
         }
     }
     
@@ -118,5 +127,39 @@ class PokemonDetailsViewModel: ObservableObject {
         default:
             .unknown
         }
+    }
+    
+    @MainActor
+    func getSpecies() async {
+        do {
+            let speciesURL = pokemonEntry.pokemonSpecies.url
+            let data = try await networkManager.request(endpoint: ApiResponseEndpoint.resource(baseURL: speciesURL, path: nil))
+            let species = try await networkManager.decode(data: data, modelType: PokemonSpecies.self)
+            self.species = species
+            
+        } catch {
+            print("PokemonDetailsVM - getSpecies: \(error.localizedDescription)")
+        }
+    }
+    
+    func getFlavorText() -> String {
+        let englishFlavorTexts = species?.flavorTextEntries.filter({ $0.language.name == "en" })
+        let versionFlavorTexts = englishFlavorTexts?.filter({ $0.version.name == selectedversion })
+        
+        if versionFlavorTexts?.count ?? 0 > 0 {
+            let flavorText = versionFlavorTexts?.first?.flavorText ?? "No information available..."
+            return flavorText.replacingOccurrences(of: "\n", with: " ")
+        } else {
+            return englishFlavorTexts?.last?.flavorText.replacingOccurrences(of: "\n", with: " ") ?? "No information available..."
+        }
+    }
+    
+    func getTotalStats() -> Int {
+        var total = 0
+        guard let stats = pokemon?.stats else { return 0 }
+        for stat in stats {
+            total += stat.baseStat
+        }
+        return total
     }
 }
