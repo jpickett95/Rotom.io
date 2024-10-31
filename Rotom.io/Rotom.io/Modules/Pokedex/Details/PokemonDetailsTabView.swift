@@ -19,13 +19,14 @@ struct PokemonDetailsTabView: View {
     
     // MARK: Body
     var body: some View {
-        
+        let type1Color = Color(vm.getTypeColor(vm.types.first ?? "").rawValue)
+        let type2Color = Color(vm.getTypeColor(vm.types.last ?? "").rawValue)
         
         TabView {
             
             // MARK: Details
             Tab("Details", systemImage: "list.bullet", role: .none) {
-                PokemonDetailsView(viewModel: vm)
+                PokemonDetailsView(viewModel: vm, type1Color: type1Color, type2Color: type2Color)
                 
             }
             
@@ -51,7 +52,7 @@ struct PokemonDetailsTabView: View {
             
         }
         .background(Color("rotomPhone-background-orange"))
-        .tint(Color(vm.getTypeColor(type: vm.types.first ?? "").rawValue)) // Pokemon Type Color
+        .tint(type1Color) // Pokemon Type Color
         .toolbar {
             ToolbarItem(placement: .principal) {
                 HStack(spacing: 10) {

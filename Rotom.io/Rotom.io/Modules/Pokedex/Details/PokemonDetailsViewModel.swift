@@ -84,7 +84,7 @@ class PokemonDetailsViewModel: ObservableObject {
         }
     }
     
-    func getTypeColor(type: String) -> PokemonTypeColor {
+    func getTypeColor(_ type: String) -> PokemonTypeColor {
         switch(type) {
         case "normal":
             .normal
@@ -154,12 +154,7 @@ class PokemonDetailsViewModel: ObservableObject {
         }
     }
     
-    func getTotalStats() -> Int {
-        var total = 0
-        guard let stats = pokemon?.stats else { return 0 }
-        for stat in stats {
-            total += stat.baseStat
-        }
-        return total
+    func getHeightWeight(_ value: Int) -> Float {
+        return Float(value) / 10
     }
 }

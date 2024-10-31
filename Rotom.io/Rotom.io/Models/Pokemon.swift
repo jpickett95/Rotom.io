@@ -12,6 +12,8 @@ struct Pokemon: Decodable {
     let species: NamedApiResource
     let types: [SpeciesType]
     let stats: [PokemonStat]
+    let height: Int
+    let weight: Int
 }
 
 struct PokemonSprites: Decodable {

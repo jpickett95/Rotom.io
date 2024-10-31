@@ -10,106 +10,33 @@ import SwiftUI
 struct PokemonDetailsView: View {
     @EnvironmentObject var coordinator: Coordinator
     @ObservedObject private var vm: PokemonDetailsViewModel
+    let type1Color: Color
+    let type2Color: Color
     
-    init(viewModel: PokemonDetailsViewModel) {
+    init(viewModel: PokemonDetailsViewModel, type1Color: Color, type2Color: Color) {
         self.vm = viewModel
+        self.type1Color = type1Color
+        self.type2Color = type2Color
     }
     
     var body: some View {
         ScrollView {
-            VStack(spacing: 0) {
-                // MARK: Artwork Picker
-                Picker("Artwork", selection: $vm.showShinyArtwork) {
-                    Text("Regular").tag(false)
-                    Text("Shiny").tag(true)
-                }
-                .pickerStyle(.segmented)
-                .padding(.vertical, 5)
-                .frame(maxWidth: 150)
-                
-                // MARK: Artwork Image
-                VStack(alignment: .leading) {
-                    if let imageData = vm.showShinyArtwork ? vm.shinyArtwork : vm.officialArtwork, let image = UIImage(data: imageData) {
-                        Image(uiImage: image)
-                            .resizable()
-                            .scaledToFit()
-                            .padding(.vertical, 20)
-                    } else {
-                        ProgressView()
-                            .progressViewStyle(.circular)
-                            .padding(.vertical, 30)
-                    }
-                }
-                .frame(maxWidth: .infinity, maxHeight: 250)
-                .background(LinearGradient(colors: [Color(vm.getTypeColor(type: vm.types.first ?? "").rawValue),.white,Color(vm.getTypeColor(type: vm.types.last ?? "").rawValue)], startPoint: .topLeading, endPoint: .bottomTrailing))
-                .border(Color("rotomPhone-background-orange"), width: 3)
-            }
-            .background(Color("rotomPhone-background-orange"))
             
-            HStack {
-                // MARK: Regional Dex #
-                Text("Regional # \(vm.pokemonEntry.entryNumber)")
-                    .foregroundStyle(.white)
-                    .font(.headline).bold()
-                    .padding([.leading, .trailing], 20)
-                    .padding(.vertical, 5)
-                    .background(Color("rotomPhone-background-orange"))
-                    .clipShape(
-                        .rect(
-                            topLeadingRadius: 0,
-                            bottomLeadingRadius: 0,
-                            bottomTrailingRadius: 20,
-                            topTrailingRadius: 20
-                        )
-                    )
-                
-                Spacer()
-                
-                // MARK: National Dex #
-                Text("National # \(vm.pokemon?.id ?? 0)")
-                    .foregroundStyle(.white)
-                    .font(.headline).bold()
-                    .padding([.leading, .trailing], 20)
-                    .padding(.vertical, 5)
-                    .background(Color("rotomPhone-background-orange"))
-                    .clipShape(
-                        .rect(
-                            topLeadingRadius: 20,
-                            bottomLeadingRadius: 20,
-                            bottomTrailingRadius: 0,
-                            topTrailingRadius: 0
-                        )
-                    )
-            }
-            .frame(maxWidth: .infinity)
-            .offset(y: -25)
+            // MARK: Artwork
+            ArtworkViewComponent(showShinyArtwork: $vm.showShinyArtwork, shinyArtwork: vm.shinyArtwork, officialArtwork: vm.officialArtwork, type1Color: type1Color, type2Color: type2Color)
+            
+            
+            // MARK: Pokedex #
+            PokedexNoViewComponent(regionalDexNo: vm.pokemonEntry.entryNumber, nationalDexNo: vm.pokemon?.id ?? 0)
+            
             
             // MARK: Name
             Text("\(vm.pokemon?.name.capitalized ?? "")")
                 .font(.largeTitle).bold()
             
             // MARK: Types
-            HStack(spacing: 15) {
-                Spacer()
-                ForEach(vm.pokemon?.types ?? [], id: \.self.slot) { type in
-                    HStack(spacing: 5) {
-                        Image("\(type.type.name.capitalized)_icon")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                        
-                        Text(type.type.name.capitalized)
-                            .font(.subheadline).bold()
-                            .foregroundStyle(.white)
-                    }
-                    .padding(.vertical, 5)
-                    .padding([.leading, .trailing], 8)
-                    .background(Color(vm.getTypeColor(type: type.type.name).rawValue))
-                    .clipShape(.capsule)
-                    
-                }
-                Spacer()
-            }
-            .frame(maxHeight:30)
+            TypesViewComponent(vm: vm, types: vm.pokemon?.types ?? [])
+            
             
             // MARK: Game Version Picker
             if vm.games.count > 1 {
@@ -130,44 +57,23 @@ struct PokemonDetailsView: View {
                 .padding(.vertical, 20)
                 .padding(.horizontal, 20)
             
-            VStack(spacing: 20) {
+            VStack(alignment: .leading,spacing: 40) {
                 
                 // MARK: Stats
-                VStack(alignment: .leading) {
-                    Text("Stats")
-                        .font(.title2).bold()
-                    
-                    if let stats = vm.pokemon?.stats {
-                        ForEach(stats, id: \.self.stat.name) { stat in
-                            
-                            HStack {
-                                Text(getStatAbbreviation(stat.stat.name)).bold()
-                                    .foregroundStyle(Color(vm.getTypeColor(type: vm.pokemon?.types.first?.type.name ?? "").rawValue))
-                                    .frame(minWidth: 70, alignment: .leading)
-                                Text("\(stat.baseStat)").bold()
-                                    .frame(minWidth: 70, alignment: .leading)
-                                ProgressView(value: Float(stat.baseStat), total: 255)
-                            }
-                            
-                            
-                        }
-                        
-                        HStack {
-                            Text("TOT").bold()
-                                .foregroundStyle(Color(vm.getTypeColor(type: vm.pokemon?.types.first?.type.name ?? "").rawValue))
-                                .frame(minWidth: 70, alignment: .leading)
-                            Text("\(vm.getTotalStats())").bold()
-                                .frame(minWidth: 70, alignment: .leading)
-                            ProgressView(value: Float(vm.getTotalStats()), total: 255*6)
-                        }
-                    }
-                }
+                StatsViewComponent(accentColor: type1Color, stats: vm.pokemon?.stats ?? [])
+                
                 
                 // MARK: Resistances
                 
+                
+                
                 // MARK: Weaknesses
                 
+                
+                
                 // MARK: Characteristics
+                CharacteristicsViewComponent(accentColor: type1Color, name: vm.pokemon?.name.capitalized ?? "", height: vm.getHeightWeight(vm.pokemon?.height ?? 0), weight: vm.getHeightWeight(vm.pokemon?.weight ?? 0))
+
             }
             .padding(.horizontal, 20)
 
@@ -175,24 +81,7 @@ struct PokemonDetailsView: View {
         }
     }
     
-    func getStatAbbreviation(_ stat: String) -> String {
-        switch stat {
-        case "hp":
-            return "HP"
-        case "attack":
-            return "ATK"
-        case "defense":
-            return "DEF"
-        case "special-attack":
-            return "SpATK"
-        case "special-defense":
-            return "SpDEF"
-        case "speed":
-            return "SPD"
-        default:
-            return "N/A"
-        }
-    }
+    
     
 }
 
