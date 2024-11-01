@@ -204,7 +204,6 @@ struct CharacteristicsViewComponent: View {
                     Text("This is a baby Pokémon!")
                 }
             }
-            
         }
     }
 
@@ -212,60 +211,76 @@ struct CharacteristicsViewComponent: View {
     func getEggGroupLabel(_ eggGroup: String) -> some View {
         let title: String
         let systemImage: String
+        let iconColor: Color
         
         switch eggGroup {
         case "monster":
             title = "Monster"
             systemImage = "pawprint.fill"
+            iconColor = .eggGroupMonster
         case "water1":
             title = "Water 1"
             systemImage = "drop.fill"
+            iconColor = .eggGroupWater1
         case "water2":
             title = "Water 2"
             systemImage = "fish.fill"
+            iconColor = .eggGroupWater2
         case "water3":
             title = "Water 3"
             systemImage = "fossil.shell.fill"
+            iconColor = .eggGroupWater3
         case "bug":
             title = "Bug"
             systemImage = "ladybug.fill"
+            iconColor = .eggGroupBug
         case "flying":
             title = "Flying"
             systemImage = "bird.fill"
+            iconColor = .eggGroupFlying
         case "ground":
             title = "Field"
             systemImage = "globe.europe.africa.fill"
+            iconColor = .eggGroupField
         case "fairy":
             title = "Fairy"
             systemImage = "sparkles"
+            iconColor = .eggGroupFairy
         case "plant":
             title = "Grass"
             systemImage = "leaf.fill"
+            iconColor = .eggGroupGrass
         case "humanshape":
             title = "Human-Like"
             systemImage = "figure.arms.open"
+            iconColor = .eggGroupHumanLike
         case "mineral":
             title = "Mineral"
             systemImage = "mountain.2.fill"
+            iconColor = .eggGroupMineral
         case "indeterminate":
             title = "Amorphous"
             systemImage = "cloud.fill"
+            iconColor = .eggGroupAmorphous
         case "ditto":
             title = "Ditto"
             systemImage = "questionmark.circle.fill"
+            iconColor = .eggGroupDitto
         case "dragon":
             title = "Dragon"
             systemImage = "lizard.fill"
+            iconColor = .eggGroupDragon
         default:
             title = "Undiscovered"
             systemImage = "x.circle.fill"
+            iconColor = .eggGroupNotDiscovered
         }
         
         return Label {
             Text(title)
         } icon: {
             Image(systemName: systemImage)
-                .foregroundStyle(accentColor)
+                .foregroundStyle(iconColor)
         }
     }
     

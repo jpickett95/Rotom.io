@@ -59,6 +59,8 @@ struct PokemonDetailsView: View {
             
             VStack(alignment: .leading,spacing: 40) {
                 
+                // MARK: Abilities
+                
                 // MARK: Stats
                 StatsViewComponent(accentColor: type1Color, stats: vm.pokemon?.stats ?? [])
                 

@@ -21,7 +21,7 @@ struct StatsViewComponent: View {
                     
                     HStack {
                         Text(getStatAbbreviation(stat.stat.name)).bold()
-                            .foregroundStyle(accentColor)
+                            .foregroundStyle(getStatColor(stat.stat.name))
                             .frame(minWidth: 70, alignment: .leading)
                         Text("\(stat.baseStat)").bold()
                             .frame(minWidth: 70, alignment: .leading)
@@ -60,6 +60,28 @@ struct StatsViewComponent: View {
         default:
             return "N/A"
         }
+    }
+    
+    func getStatColor(_ stat: String) -> Color {
+        let color: Color
+        switch stat {
+        case "hp":
+            color = .statHp
+        case "attack":
+            color = .statAttack
+        case "defense":
+            color = .statDefense
+        case "special-attack":
+            color = .statSpecialAttack
+        case "special-defense":
+            color = .statSpecialDefense
+        case "speed":
+            color = .statSpeed
+        default:
+            color = accentColor
+        }
+        
+        return color
     }
     
     func getTotalStats() -> Int {
