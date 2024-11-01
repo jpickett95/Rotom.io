@@ -154,7 +154,16 @@ class PokemonDetailsViewModel: ObservableObject {
         }
     }
     
-    func getHeightWeight(_ value: Int) -> Float {
-        return Float(value) / 10
+    func getHeightWeight(_ value: Int, isHeight: Bool) -> String {
+        if isHeight {
+            let meters = Float(value) / 10
+            let inches = Float(value) * 3.937
+            let feet = inches / 12
+            return "\(String(format: "%.1f", meters)) m\t-\t\(Int(feet))' \(Int(inches.truncatingRemainder(dividingBy: 12).rounded()))\""
+        } else {
+            let kilograms = Float(value) / 10
+            let pounds = Float(value) / 4.536
+            return "\(String(format: "%.1f", kilograms)) kg\t-\t\(String(format: "%.1f",pounds)) lbs"
+        }
     }
 }

@@ -23,7 +23,7 @@ struct PokemonDetailsView: View {
         ScrollView {
             
             // MARK: Artwork
-            ArtworkViewComponent(showShinyArtwork: $vm.showShinyArtwork, shinyArtwork: vm.shinyArtwork, officialArtwork: vm.officialArtwork, type1Color: type1Color, type2Color: type2Color)
+            ArtworkViewComponent(showShinyArtwork: $vm.showShinyArtwork, shinyArtwork: vm.shinyArtwork, officialArtwork: vm.officialArtwork, type1Color: type1Color, type2Color: type2Color, isLegendary: vm.species?.isLegendary ?? false, isMythical: vm.species?.isMythical ?? false, isBaby: vm.species?.isBaby ?? false)
             
             
             // MARK: Pokedex #
@@ -72,7 +72,7 @@ struct PokemonDetailsView: View {
                 
                 
                 // MARK: Characteristics
-                CharacteristicsViewComponent(accentColor: type1Color, name: vm.pokemon?.name.capitalized ?? "", height: vm.getHeightWeight(vm.pokemon?.height ?? 0), weight: vm.getHeightWeight(vm.pokemon?.weight ?? 0))
+                CharacteristicsViewComponent(accentColor: type1Color, name: vm.pokemon?.name.capitalized ?? "N/A", height: vm.getHeightWeight(vm.pokemon?.height ?? 0, isHeight: true), weight: vm.getHeightWeight(vm.pokemon?.weight ?? 0, isHeight: false), captureRate: vm.species?.captureRate ?? 0, firstAppearance: vm.species?.generation.name ?? "N/A", eggGroups: vm.species?.eggGroups ?? [], hatchCounter: vm.species?.hatchCounter ?? 0, genderRate: vm.species?.genderRate ?? -2, growthRate: vm.species?.growthRate.name.replacingOccurrences(of: "-", with: " ").capitalized.replacingOccurrences(of: "Then", with: "then") ?? "N/A", baseExpYield: vm.pokemon?.baseExperience ?? 0, category: vm.species?.genera.filter({$0.language.name == "en"}).first?.genus ?? "N/A", stats: vm.pokemon?.stats.filter({$0.effort > 0}) ?? [], isLegendary: vm.species?.isLegendary ?? false, isMythical: vm.species?.isMythical ?? false, isBaby: vm.species?.isBaby ?? false)
 
             }
             .padding(.horizontal, 20)

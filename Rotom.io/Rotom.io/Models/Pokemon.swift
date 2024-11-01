@@ -14,6 +14,7 @@ struct Pokemon: Decodable {
     let stats: [PokemonStat]
     let height: Int
     let weight: Int
+    let baseExperience: Int
 }
 
 struct PokemonSprites: Decodable {
@@ -44,6 +45,16 @@ struct SpeciesType: Decodable {
 struct PokemonSpecies: Decodable {
     let flavorTextEntries: [FlavorText]
     let varieties: [PokemonSpeciesVariety]
+    let captureRate: Int
+    let eggGroups: [NamedApiResource]
+    let hatchCounter: Int
+    let growthRate: NamedApiResource
+    let genderRate: Int
+    let generation: NamedApiResource
+    let genera: [Genus]
+    let isLegendary: Bool
+    let isMythical: Bool
+    let isBaby: Bool
 }
 
 struct PokemonSpeciesVariety: Decodable {
@@ -55,4 +66,9 @@ struct PokemonStat: Decodable {
     let stat: NamedApiResource
     let effort: Int
     let baseStat: Int
+}
+
+struct Genus: Decodable {
+    let genus: String
+    let language: NamedApiResource
 }
