@@ -15,6 +15,7 @@ struct Pokemon: Decodable {
     let height: Int
     let weight: Int
     let baseExperience: Int
+    let abilities: [PokemonAbility]
 }
 
 struct PokemonSprites: Decodable {
@@ -35,6 +36,18 @@ struct OtherArtwork: Decodable {
 struct OfficialArtwork: Decodable {
     let frontDefault: String
     let frontShiny: String
+}
+
+struct PokemonStat: Decodable {
+    let stat: NamedApiResource
+    let effort: Int
+    let baseStat: Int
+}
+
+struct PokemonAbility: Decodable {
+    let isHidden: Bool
+    let slot: Int
+    let ability: NamedApiResource
 }
 
 struct SpeciesType: Decodable {
@@ -60,12 +73,6 @@ struct PokemonSpecies: Decodable {
 struct PokemonSpeciesVariety: Decodable {
     let isDefault: Bool
     let pokemon: NamedApiResource
-}
-
-struct PokemonStat: Decodable {
-    let stat: NamedApiResource
-    let effort: Int
-    let baseStat: Int
 }
 
 struct Genus: Decodable {

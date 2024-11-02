@@ -27,6 +27,7 @@ class PokemonDetailsViewModel: ObservableObject {
     @Published var types = [String]()
     @Published var species: PokemonSpecies?
     @Published var selectedversion: String?
+    @Published var abilities = [String: Ability]()
     
     // MARK: - -- Lifecycle
     init(networkManager: Networking & JSONDecoding, entry: PokemonEntry, settings: Settings) {
@@ -40,6 +41,7 @@ class PokemonDetailsViewModel: ObservableObject {
             await getTypes()
             await getArtwork()
             await getSpecies()
+            await getAbilities()
         }
     }
     
@@ -81,6 +83,35 @@ class PokemonDetailsViewModel: ObservableObject {
         if let type1 = pokemon?.types.first?.type.name, let type2 = pokemon?.types.last?.type.name {
             types.append(type1)
             types.append(type2)
+        }
+    }
+    
+    @MainActor
+    func getSpecies() async {
+        do {
+            let speciesURL = pokemonEntry.pokemonSpecies.url
+            let data = try await networkManager.request(endpoint: ApiResponseEndpoint.resource(baseURL: speciesURL, path: nil))
+            let species = try await networkManager.decode(data: data, modelType: PokemonSpecies.self)
+            self.species = species
+            
+        } catch {
+            print("PokemonDetailsVM - getSpecies: \(error.localizedDescription)")
+        }
+    }
+    
+    @MainActor
+    func getAbilities() async {
+        do {
+            guard let abilities = pokemon?.abilities else {return}
+            for pokemonAbility in abilities {
+                let abilityURL = pokemonAbility.ability.url
+                let data = try await networkManager.request(endpoint: ApiResponseEndpoint.resource(baseURL: abilityURL, path: nil))
+                let ability = try await networkManager.decode(data: data, modelType: Ability.self)
+                self.abilities[pokemonAbility.ability.name] = ability
+            }
+            
+        } catch {
+            print("PokemonDetailsVM - getAbilities: \(error.localizedDescription)")
         }
     }
     
@@ -126,19 +157,6 @@ class PokemonDetailsViewModel: ObservableObject {
             .stellar
         default:
             .unknown
-        }
-    }
-    
-    @MainActor
-    func getSpecies() async {
-        do {
-            let speciesURL = pokemonEntry.pokemonSpecies.url
-            let data = try await networkManager.request(endpoint: ApiResponseEndpoint.resource(baseURL: speciesURL, path: nil))
-            let species = try await networkManager.decode(data: data, modelType: PokemonSpecies.self)
-            self.species = species
-            
-        } catch {
-            print("PokemonDetailsVM - getSpecies: \(error.localizedDescription)")
         }
     }
     
