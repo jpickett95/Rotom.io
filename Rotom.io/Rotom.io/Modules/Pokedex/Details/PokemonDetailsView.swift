@@ -62,16 +62,17 @@ struct PokemonDetailsView: View {
                 // MARK: Abilities
                 AbilitiesViewComponent(pokemonAbilities: vm.pokemon?.abilities ?? [], abilities: vm.abilities, accentColor: type1Color, versions: vm.settings.game.versions)
                 
+                
                 // MARK: Stats
                 StatsViewComponent(accentColor: type1Color, stats: vm.pokemon?.stats ?? [])
                 
                 
                 // MARK: Resistances
-                
+                ResistancesViewComponent(vm: vm)
                 
                 
                 // MARK: Weaknesses
-                
+                WeaknessesViewComponent(vm: vm)
                 
                 
                 // MARK: Characteristics

@@ -16,6 +16,7 @@ struct Pokemon: Decodable {
     let weight: Int
     let baseExperience: Int
     let abilities: [PokemonAbility]
+    let cries: Cries
 }
 
 struct PokemonSprites: Decodable {
@@ -53,6 +54,11 @@ struct PokemonAbility: Decodable {
 struct SpeciesType: Decodable {
     let slot: Int
     let type: NamedApiResource
+}
+
+struct Cries: Decodable {
+    let latest: String
+    let legacy: String
 }
 
 struct PokemonSpecies: Decodable {

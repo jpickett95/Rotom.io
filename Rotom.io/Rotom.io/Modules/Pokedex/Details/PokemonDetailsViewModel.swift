@@ -24,10 +24,10 @@ class PokemonDetailsViewModel: ObservableObject {
     @Published var officialArtwork: Data?
     @Published var shinyArtwork: Data?
     @Published var showShinyArtwork: Bool = false
-    @Published var types = [String]()
     @Published var species: PokemonSpecies?
     @Published var selectedversion: String?
     @Published var abilities = [String: Ability]()
+    @Published var damageRelations = [String: Float]()
     
     // MARK: - -- Lifecycle
     init(networkManager: Networking & JSONDecoding, entry: PokemonEntry, settings: Settings) {
@@ -38,10 +38,10 @@ class PokemonDetailsViewModel: ObservableObject {
         
         Task {
             await getPokemon()
-            await getTypes()
             await getArtwork()
             await getSpecies()
             await getAbilities()
+            await getDamageRelations()
         }
     }
     
@@ -79,14 +79,6 @@ class PokemonDetailsViewModel: ObservableObject {
     }
     
     @MainActor
-    func getTypes() {
-        if let type1 = pokemon?.types.first?.type.name, let type2 = pokemon?.types.last?.type.name {
-            types.append(type1)
-            types.append(type2)
-        }
-    }
-    
-    @MainActor
     func getSpecies() async {
         do {
             let speciesURL = pokemonEntry.pokemonSpecies.url
@@ -112,6 +104,51 @@ class PokemonDetailsViewModel: ObservableObject {
             
         } catch {
             print("PokemonDetailsVM - getAbilities: \(error.localizedDescription)")
+        }
+    }
+    
+    @MainActor
+    func getDamageRelations() async {
+        do {
+            guard let pokemonTypes = pokemon?.types else {return}
+            var types = [TypeData]()
+            for pokemonType in pokemonTypes {
+                let typeURL = pokemonType.type.url
+                let data = try await networkManager.request(endpoint: ApiResponseEndpoint.resource(baseURL: typeURL, path: nil))
+                let type = try await networkManager.decode(data: data, modelType: TypeData.self)
+                types.append(type)
+            }
+            
+            for type in types {
+                let damageRelations = type.damageRelations
+                
+                for typeName in damageRelations.noDamageFrom {
+                    if let currentValue = self.damageRelations[typeName.name] {
+                        self.damageRelations[typeName.name] = currentValue * 0
+                    } else {
+                        self.damageRelations[typeName.name] = 0
+                    }
+                }
+                
+                for typeName in damageRelations.halfDamageFrom {
+                    if let currentValue = self.damageRelations[typeName.name] {
+                        self.damageRelations[typeName.name] = currentValue * 0.5
+                    } else {
+                        self.damageRelations[typeName.name] = 0.5
+                    }
+                }
+                
+                for typeName in damageRelations.doubleDamageFrom {
+                    if let currentValue = self.damageRelations[typeName.name] {
+                        self.damageRelations[typeName.name] = currentValue * 2
+                    } else {
+                        self.damageRelations[typeName.name] = 2
+                    }
+                }
+            }
+            
+        } catch {
+            print("PokemonDetailsVM - getDamageRelations: \(error.localizedDescription)")
         }
     }
     
