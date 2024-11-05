@@ -30,9 +30,20 @@ struct PokemonDetailsView: View {
             PokedexNoViewComponent(regionalDexNo: vm.pokemonEntry.entryNumber, nationalDexNo: vm.pokemon?.id ?? 0)
             
             
-            // MARK: Name
-            Text("\(vm.pokemon?.name.capitalized ?? "")")
-                .font(.largeTitle).bold()
+            HStack {
+                // MARK: Name
+                Text("\(vm.pokemon?.name.capitalized.replacingOccurrences(of: "-", with: " ") ?? "")")
+                    .font(.largeTitle).bold()
+                
+                if let cry = vm.latestCry {
+                    Button {
+                        cry.play()
+                    } label: {
+                        Image(systemName: "speaker.wave.2.circle.fill")
+                            .imageScale(.large)
+                    }
+                }
+            }
             
             // MARK: Types
             TypesViewComponent(vm: vm, types: vm.pokemon?.types ?? [])
@@ -80,6 +91,9 @@ struct PokemonDetailsView: View {
 
             }
             .padding(.horizontal, 20)
+            
+            
+
 
             Spacer()
         }

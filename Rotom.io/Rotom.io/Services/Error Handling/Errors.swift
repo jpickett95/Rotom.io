@@ -82,12 +82,14 @@ extension NetworkingError: LocalizedError {
  - invalidData
  - missingKey
  - typeMismatch
+ - oggToWavConversionFailure
  */
 enum DecodeError: Error {
     case invalidJSON
     case invalidData(_ description: String)
     case missingKey
     case typeMismatch
+    case oggToWavConversionFailure
 }
 
 extension DecodeError: LocalizedError {
@@ -101,6 +103,8 @@ extension DecodeError: LocalizedError {
             return String(localized: "Decoding Error: Missing Key")
         case .typeMismatch:
             return String(localized: "Decoding Error: Type Mismatch")
+        case .oggToWavConversionFailure:
+            return String(localized: "Decoding Error: Ogg to Wav Conversion Failure")
         }
     }
     
@@ -114,6 +118,8 @@ extension DecodeError: LocalizedError {
             return String(localized: "Missing key")
         case .typeMismatch:
             return String(localized: "Type mismatch")
+        case .oggToWavConversionFailure:
+            return String(localized: "Could not convert file from .ogg to .wav")
         }
     }
     
@@ -127,6 +133,8 @@ extension DecodeError: LocalizedError {
             return String(localized: "Try to add the missing key")
         case .typeMismatch:
             return String(localized: "Try to cast the value to the correct type")
+        case .oggToWavConversionFailure:
+            return String(localized: "Check url provided.")
         }
     }
 }

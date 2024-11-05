@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		CFA29EB52CD6F53F00D139F4 /* OggDecoder in Frameworks */ = {isa = PBXBuildFile; productRef = CFA29EB42CD6F53F00D139F4 /* OggDecoder */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		CF99E2DC2CBD995C00034DBF /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -52,6 +56,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CFA29EB52CD6F53F00D139F4 /* OggDecoder in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -112,6 +117,7 @@
 			);
 			name = Rotom.io;
 			packageProductDependencies = (
+				CFA29EB42CD6F53F00D139F4 /* OggDecoder */,
 			);
 			productName = Rotom.io;
 			productReference = CF99E2C52CBD995A00034DBF /* Rotom.io.app */;
@@ -195,6 +201,9 @@
 			);
 			mainGroup = CF99E2BC2CBD995A00034DBF;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				CFA29EB32CD6F53F00D139F4 /* XCRemoteSwiftPackageReference "OggDecoder" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = CF99E2C62CBD995A00034DBF /* Products */;
 			projectDirPath = "";
@@ -561,6 +570,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		CFA29EB32CD6F53F00D139F4 /* XCRemoteSwiftPackageReference "OggDecoder" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/arkasas/OggDecoder.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		CFA29EB42CD6F53F00D139F4 /* OggDecoder */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CFA29EB32CD6F53F00D139F4 /* XCRemoteSwiftPackageReference "OggDecoder" */;
+			productName = OggDecoder;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = CF99E2BD2CBD995A00034DBF /* Project object */;
 }

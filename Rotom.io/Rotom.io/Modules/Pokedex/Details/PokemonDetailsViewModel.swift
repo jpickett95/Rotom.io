@@ -7,7 +7,8 @@
 
 // MARK: Pokemon Details View Model
 import Foundation
-
+import OggDecoder
+import AVFoundation
 
 // MARK: - - View Model
 class PokemonDetailsViewModel: ObservableObject {
@@ -28,6 +29,7 @@ class PokemonDetailsViewModel: ObservableObject {
     @Published var selectedversion: String?
     @Published var abilities = [String: Ability]()
     @Published var damageRelations = [String: Float]()
+    @Published var latestCry: AVAudioPlayer?
     
     // MARK: - -- Lifecycle
     init(networkManager: Networking & JSONDecoding, entry: PokemonEntry, settings: Settings) {
@@ -42,6 +44,7 @@ class PokemonDetailsViewModel: ObservableObject {
             await getSpecies()
             await getAbilities()
             await getDamageRelations()
+            await convertCriesToWAV()
         }
     }
     
@@ -149,6 +152,25 @@ class PokemonDetailsViewModel: ObservableObject {
             
         } catch {
             print("PokemonDetailsVM - getDamageRelations: \(error.localizedDescription)")
+        }
+    }
+    
+    @MainActor
+    func convertCriesToWAV() async {
+        do {
+            guard let latest = pokemon?.cries.latest, let latestOggURL = URL(string: latest) else { return }
+            print(latestOggURL)
+            
+            let (downloadURL, response) = try await URLSession.shared.download(from: latestOggURL)
+            
+            let decoder = OGGDecoder()
+            guard let latestWAVFile = await decoder.decode(downloadURL) else {
+                throw DecodeError.oggToWavConversionFailure
+            }
+            print(latestWAVFile)
+            latestCry = try AVAudioPlayer(contentsOf: latestWAVFile)
+        } catch {
+            print("PokemonDetailsVM - convertCriesToWAV: \(error.localizedDescription)")
         }
     }
     

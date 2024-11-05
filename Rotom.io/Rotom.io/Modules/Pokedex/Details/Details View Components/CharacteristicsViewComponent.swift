@@ -204,6 +204,9 @@ struct CharacteristicsViewComponent: View {
                     Text("This is a baby Pokémon!")
                 }
             }
+            
+           
+
         }
     }
 

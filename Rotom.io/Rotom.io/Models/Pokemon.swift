@@ -58,7 +58,7 @@ struct SpeciesType: Decodable {
 
 struct Cries: Decodable {
     let latest: String
-    let legacy: String
+    let legacy: String?
 }
 
 struct PokemonSpecies: Decodable {
@@ -74,6 +74,8 @@ struct PokemonSpecies: Decodable {
     let isLegendary: Bool
     let isMythical: Bool
     let isBaby: Bool
+    let evolutionChain: ApiResource
+    let evolvesFromSpecies: NamedApiResource?
 }
 
 struct PokemonSpeciesVariety: Decodable {

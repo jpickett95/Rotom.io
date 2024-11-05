@@ -33,7 +33,10 @@ struct PokemonDetailsTabView: View {
             
             // MARK: Evolutions
             Tab("Evolutions", systemImage: "point.3.connected.trianglepath.dotted", role: .none) {
-                PokemonEvolutionsView()
+                
+                if let species = vm.species {
+                    PokemonEvolutionsView(viewModel: PokemonEvolutionsViewModel(networkManager: NetworkManager(), species: species))
+                }
                 
             }
             
