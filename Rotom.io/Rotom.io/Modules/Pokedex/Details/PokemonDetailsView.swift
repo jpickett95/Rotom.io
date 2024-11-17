@@ -27,19 +27,19 @@ struct PokemonDetailsView: View {
             
             
             // MARK: Pokedex #
-            PokedexNoViewComponent(regionalDexNo: vm.pokemonEntry.entryNumber, nationalDexNo: vm.pokemon?.id ?? 0)
+            PokedexNoViewComponent(regionalDexNo: vm.pokemonEntry.entryNumber, nationalDexNo: vm.pokemon?.id ?? NumberConstants.zeroPlaeholder)
             
             
             HStack {
                 // MARK: Name
-                Text("\(vm.pokemon?.name.capitalized.replacingOccurrences(of: "-", with: " ") ?? "")")
+                Text("\(vm.pokemon?.name.capitalized.replacingOccurrences(of: StringConstants.hyphen, with: StringConstants.space) ?? StringConstants.emptyString)")
                     .font(.largeTitle).bold()
                 
                 if let cry = vm.latestCry {
                     Button {
                         cry.play()
                     } label: {
-                        Image(systemName: "speaker.wave.2.circle.fill")
+                        Image(systemName: PokedexConstants.audioButtonIcon)
                             .imageScale(.large)
                     }
                 }
@@ -51,24 +51,24 @@ struct PokemonDetailsView: View {
             
             // MARK: Game Version Picker
             if vm.games.count > 1 {
-                Picker("Game Version", selection: $vm.selectedversion) {
+                Picker(PokedexConstants.gameVersionPickerStringKey, selection: $vm.selectedversion) {
                     ForEach(vm.games, id: \.self) {
-                        Text($0.replacingOccurrences(of: "-", with: " ").capitalized).tag($0)
+                        Text($0.replacingOccurrences(of: StringConstants.hyphen, with: StringConstants.space).capitalized).tag($0)
                     }
                 }
-                .padding(.top, 20)
+                .padding(.top, NumberConstants.topContentPadding)
             }
             
             // MARK: Flavor Text
             Text(vm.getFlavorText())
-                .padding(.horizontal, 20)
-                .padding(.top, 10)
+                .padding(.horizontal, NumberConstants.horizontalContentPadding)
+                .padding(.top, NumberConstants.topContentPadding)
             
             Divider()
-                .padding(.vertical, 20)
-                .padding(.horizontal, 20)
+                .padding(.vertical, NumberConstants.verticalContentPadding)
+                .padding(.horizontal, NumberConstants.horizontalContentPadding)
             
-            VStack(alignment: .leading,spacing: 40) {
+            VStack(alignment: .leading, spacing: PokedexConstants.detailsViewComponentContentSpacing) {
                 
                 // MARK: Abilities
                 AbilitiesViewComponent(pokemonAbilities: vm.pokemon?.abilities ?? [], abilities: vm.abilities, accentColor: type1Color, versions: vm.settings.game.versions)
@@ -87,10 +87,10 @@ struct PokemonDetailsView: View {
                 
                 
                 // MARK: Characteristics
-                CharacteristicsViewComponent(accentColor: type1Color, name: vm.pokemon?.name.capitalized ?? "N/A", height: vm.getHeightWeight(vm.pokemon?.height ?? 0, isHeight: true), weight: vm.getHeightWeight(vm.pokemon?.weight ?? 0, isHeight: false), captureRate: vm.species?.captureRate ?? 0, firstAppearance: vm.species?.generation.name ?? "N/A", eggGroups: vm.species?.eggGroups ?? [], hatchCounter: vm.species?.hatchCounter ?? 0, genderRate: vm.species?.genderRate ?? -2, growthRate: vm.species?.growthRate.name.replacingOccurrences(of: "-", with: " ").capitalized.replacingOccurrences(of: "Then", with: "then") ?? "N/A", baseExpYield: vm.pokemon?.baseExperience ?? 0, category: vm.species?.genera.filter({$0.language.name == "en"}).first?.genus ?? "N/A", stats: vm.pokemon?.stats.filter({$0.effort > 0}) ?? [], isLegendary: vm.species?.isLegendary ?? false, isMythical: vm.species?.isMythical ?? false, isBaby: vm.species?.isBaby ?? false)
+                CharacteristicsViewComponent(accentColor: type1Color, name: vm.pokemon?.name.capitalized ?? StringConstants.notAvailable, height: vm.getHeightWeight(vm.pokemon?.height ?? NumberConstants.zeroPlaeholder, isHeight: true), weight: vm.getHeightWeight(vm.pokemon?.weight ?? NumberConstants.zeroPlaeholder, isHeight: false), captureRate: vm.species?.captureRate ?? NumberConstants.zeroPlaeholder, firstAppearance: vm.species?.generation.name ?? StringConstants.notAvailable, eggGroups: vm.species?.eggGroups ?? [], hatchCounter: vm.species?.hatchCounter ?? NumberConstants.zeroPlaeholder, genderRate: vm.species?.genderRate ?? PokedexConstants.genderRatePlaceholder, growthRate: vm.species?.growthRate.name.replacingOccurrences(of: StringConstants.hyphen, with: StringConstants.space).capitalized.replacingOccurrences(of: "Then", with: "then") ?? StringConstants.notAvailable, baseExpYield: vm.pokemon?.baseExperience ?? NumberConstants.zeroPlaeholder, category: vm.species?.genera.filter({$0.language.name == LanguageCode.english.rawValue}).first?.genus ?? StringConstants.notAvailable, stats: vm.pokemon?.stats.filter({$0.effort > 0}) ?? [], isLegendary: vm.species?.isLegendary ?? false, isMythical: vm.species?.isMythical ?? false, isBaby: vm.species?.isBaby ?? false)
 
             }
-            .padding(.horizontal, 20)
+            .padding(.horizontal, NumberConstants.horizontalContentPadding)
             
             
 

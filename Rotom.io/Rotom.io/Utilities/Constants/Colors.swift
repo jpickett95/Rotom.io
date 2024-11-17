@@ -1,9 +1,15 @@
 //
-//  ColorEnums.swift
+//  Colors.swift
 //  Rotom.io
 //
-//  Created by Jonah Pickett on 10/14/24.
+//  Created by Jonah Pickett on 11/7/24.
 //
+
+import SwiftUICore
+
+struct RotomPhoneColors {
+    static let background = Color("rotomPhone-background-orange")
+}
 
 enum PokemonGameColor: String {
     case national

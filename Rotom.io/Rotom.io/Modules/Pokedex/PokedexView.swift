@@ -11,7 +11,7 @@ struct PokedexView: View {
     // MARK: Properties
     @ObservedObject private var vm: PokedexViewModel
     @EnvironmentObject var coordinator: Coordinator
-    
+    let gridColumns = [GridItem(.adaptive(minimum: NumberConstants.gridItemMinSize), spacing: NumberConstants.gridItemSpacing)]
     
     // MARK: Lifecycle
     init(viewModel: PokedexViewModel) {
@@ -27,7 +27,7 @@ struct PokedexView: View {
                     
                     // MARK: Pokedex Section
                     Section {
-                        LazyVGrid(columns: [GridItem(.adaptive(minimum: 50), spacing: 15)]) {
+                        LazyVGrid(columns: gridColumns) {
                             ForEach(pokedex.pokemonEntries, id: \.self.entryNumber) { entry in
                                 
                                 Button {
@@ -49,7 +49,7 @@ struct PokedexView: View {
                         .padding()
                     } header: {
                         HStack {
-                            Text(pokedex.name.replacingOccurrences(of: "-", with: " ").capitalized)
+                            Text(pokedex.name.replacingOccurrences(of: StringConstants.hyphen, with: StringConstants.space).capitalized)
                                 .font(.title3).bold()
                             
                             Spacer()

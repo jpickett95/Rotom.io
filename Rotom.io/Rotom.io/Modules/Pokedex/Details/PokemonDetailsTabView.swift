@@ -19,20 +19,20 @@ struct PokemonDetailsTabView: View {
     
     // MARK: Body
     var body: some View {
-        let type1Color = Color(vm.getTypeColor(vm.pokemon?.types.first?.type.name ?? "").rawValue)
-        let type2Color = Color(vm.getTypeColor(vm.pokemon?.types.last?.type.name ?? "").rawValue)
+        let type1Color = Color(vm.getTypeColor(vm.pokemon?.types.first?.type.name ?? StringConstants.emptyString).rawValue)
+        let type2Color = Color(vm.getTypeColor(vm.pokemon?.types.last?.type.name ?? StringConstants.emptyString).rawValue)
         
         TabView {
             
             // MARK: Details
-            Tab("Details", systemImage: "list.bullet", role: .none) {
+            Tab(PokedexConstants.detailsTabTitle, systemImage: PokedexConstants.detailsTabIcon, role: .none) {
                 PokemonDetailsView(viewModel: vm, type1Color: type1Color, type2Color: type2Color)
                 
             }
             
             
             // MARK: Evolutions
-            Tab("Evolutions", systemImage: "point.3.connected.trianglepath.dotted", role: .none) {
+            Tab(PokedexConstants.evolutionsTabTitle, systemImage: PokedexConstants.evolutionsTabIcon, role: .none) {
                 
                 if let species = vm.species {
                     PokemonEvolutionsView(viewModel: PokemonEvolutionsViewModel(networkManager: NetworkManager(), species: species))
@@ -41,24 +41,24 @@ struct PokemonDetailsTabView: View {
             }
             
             // MARK: Locations
-            Tab("Locations", systemImage: "location.north", role: .none) {
+            Tab(PokedexConstants.locationsTabTitle, systemImage: PokedexConstants.locationsTabIcon, role: .none) {
                 PokemonLocationsView()
                 
             }
             
             // MARK: Moves
-            Tab("Moves", systemImage: "dot.scope", role: .none) {
+            Tab(PokedexConstants.movesTabTitle, systemImage: PokedexConstants.movesTabIcon, role: .none) {
                 PokemonMovesView()
                 
             }
             
             
         }
-        .background(Color("rotomPhone-background-orange"))
+        .background(RotomPhoneColors.background)
         .tint(type1Color) // Pokemon Type Color
         .toolbar {
             ToolbarItem(placement: .principal) {
-                HStack(spacing: 10) {
+                HStack(spacing: PokedexConstants.tabTopToolbarTitleSpacing) {
                     if let imageData = FileManager.readDataFromFile(filename: "\(vm.pokemonEntry.pokemonSpecies.name).dat"), let image = UIImage(data: imageData) {
                         Image(uiImage: image)
                             .resizable()
@@ -71,7 +71,7 @@ struct PokemonDetailsTabView: View {
                 }
             }
         }
-        .toolbarBackground(Color("rotomPhone-background-orange"), for: .navigationBar, .tabBar)
+        .toolbarBackground(RotomPhoneColors.background, for: .navigationBar, .tabBar)
         .toolbarBackgroundVisibility(.visible, for: .navigationBar, .tabBar)
         
     }

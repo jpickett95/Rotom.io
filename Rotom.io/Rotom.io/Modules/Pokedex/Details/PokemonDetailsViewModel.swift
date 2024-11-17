@@ -159,7 +159,7 @@ class PokemonDetailsViewModel: ObservableObject {
     func convertCriesToWAV() async {
         do {
             guard let latest = pokemon?.cries.latest, let latestOggURL = URL(string: latest) else { return }
-            print(latestOggURL)
+            //print(latestOggURL)
             
             let (downloadURL, response) = try await URLSession.shared.download(from: latestOggURL)
             
@@ -167,7 +167,7 @@ class PokemonDetailsViewModel: ObservableObject {
             guard let latestWAVFile = await decoder.decode(downloadURL) else {
                 throw DecodeError.oggToWavConversionFailure
             }
-            print(latestWAVFile)
+            //print(latestWAVFile)
             latestCry = try AVAudioPlayer(contentsOf: latestWAVFile)
         } catch {
             print("PokemonDetailsVM - convertCriesToWAV: \(error.localizedDescription)")
